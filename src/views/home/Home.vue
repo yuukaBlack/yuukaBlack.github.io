@@ -7,7 +7,10 @@
 
 <script setup lang="ts">
 import circleUrl from '../../assets/rich.jpg';
+import { allBlogs, tagBlogs } from '@/build/data.js'
 
+
+console.log(11, allBlogs, tagBlogs)
 </script>
 
 <style lang="scss" scoped>

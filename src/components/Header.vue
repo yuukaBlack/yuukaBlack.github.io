@@ -10,14 +10,13 @@
       Yuuka
     </el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item index="1">Home</el-menu-item>
+    <el-menu-item index="1">首页</el-menu-item>
     <el-sub-menu index="2">
-      <template #title>Tag</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
+      <template #title>分类</template>
+      <el-menu-item index="2-1">技术</el-menu-item>
+      <el-menu-item index="2-2">生活</el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="3">About</el-menu-item>
+    <el-menu-item index="3">关于</el-menu-item>
   </el-menu>
 </template>
 
