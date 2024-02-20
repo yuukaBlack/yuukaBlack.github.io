@@ -14,9 +14,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "element-plus": "^2.5.5",
     "gray-matter": "^4.0.3",
-    "pinia": "^2.1.7",
+    "markdown-it": "^14.0.0",
     "sass": "^1.70.0",
     "scss": "^0.2.4",
     "vue": "^3.4.15",

@@ -1,29 +1,43 @@
 <template>
-  <div class="flex-center">
-    <el-avatar :size="80" :src="circleUrl" />
-    <div class="desc">This is Yuuka</div>
+  <div class="main">
+    <div class="head">
+      <el-avatar :size="80" :src="circleUrl" />
+      <div class="desc">
+        <div>Hey</div>
+        <div>Welcome to my blog</div>
+      </div>
+    </div>
+    <blog-table :list="allBlogs"></blog-table>
   </div>
 </template>
 
 <script setup lang="ts">
 import circleUrl from '../../assets/rich.jpg';
 import { allBlogs, tagBlogs } from '@/build/data.js'
+import BlogTable from '../../components/BlogTable.vue'
 
 
-console.log(11, allBlogs, tagBlogs)
 </script>
 
 <style lang="scss" scoped>
-.flex-center {
-  width: 300px;
-  margin: 30px auto;
+.head {
+  width: 55vw;
+  margin: 0 auto;
+  padding: 70px 0;
+  text-align: center;
 }
 .desc {
-  width: 300px;
-  color: white;
-  padding: 15px 30px;
-  background: rgb(10, 71, 10);
-  margin-top: 30px;
-  text-align: center;
+  font-size: 26px;
+  color: rgb(10, 71, 10);
+  margin-top: 50px;
+  text-align: left;
+  > div {
+    font-weight: 700 !important;
+  }
+}
+@media (max-width: 768px) {
+  .head {
+    width: 90vw;
+  }
 }
 </style>

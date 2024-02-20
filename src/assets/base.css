@@ -91,3 +91,8 @@ body .flex-center {
   justify-content: center;
   flex-wrap: wrap;
 }
+body .main {
+  background-image: url(../assets//bg.jpg);
+  background-size: 100% 100%;
+  min-height: calc(100vh - 60px);
+}

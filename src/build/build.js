@@ -2,26 +2,26 @@ import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
 
-let allBlogs = new Object();
+let allBlogs = [];
 
 let tagBlogs = {
-  life: new Object(),
-  skill: new Object()
+  life: [],
+  skill: []
 };
 
 const docsDir = 'src/doc';
 const files = fs.readdirSync(docsDir);
-const result = new Map();
+const result = [];
 files.forEach(file => {
   const filePath = path.join(docsDir, file);
   const content = fs.readFileSync(filePath, 'utf-8');
   const parsed = matter(content);
-  result[parsed.data.date] = parsed
+  result.push(parsed)
 })
 allBlogs = result
 
 Object.values(allBlogs).forEach((blog) => {
-  tagBlogs[blog.data.tag][blog.data.date] = blog;
+  tagBlogs[blog.data.tag].push(blog);
 })
 
 fs.writeFileSync('src/build/data.js', `export const allBlogs = ${JSON.stringify(allBlogs)}\n\nexport const tagBlogs = ${JSON.stringify(tagBlogs)}\n`);
