@@ -2,8 +2,8 @@
   <div class="main">
     <div class="blog">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-        <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ route.query.type }}</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ typeName }}</el-breadcrumb-item>
         <el-breadcrumb-item>{{ data?.data.title }}</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="title">{{ data?.data.title }}</div>
@@ -19,6 +19,7 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it';
 import type { BlogItem } from '../../types/index';
+import { TypeName } from '../../types/const';
 
 const md = new MarkdownIt();
 
@@ -31,6 +32,9 @@ const data = computed(() => {
 const blog = computed(() => {
   const html = md.render(data.value?.content);
   return html
+})
+const typeName = computed(() => {
+  return TypeName[route.query.type as keyof typeof TypeName]
 })
 
 </script>

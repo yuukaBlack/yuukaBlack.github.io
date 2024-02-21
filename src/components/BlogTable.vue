@@ -73,7 +73,7 @@ function openBlog(item: BlogItem) {
   .summary {
     text-align: left;
   }
-  .el-divider:deep .el-divider__text {
+  .el-divider:deep(.el-divider__text) {
     background-color: transparent;
   }
 }
