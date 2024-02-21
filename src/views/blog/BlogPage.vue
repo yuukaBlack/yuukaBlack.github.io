@@ -21,7 +21,9 @@ import MarkdownIt from 'markdown-it';
 import type { BlogItem } from '../../types/index';
 import { TypeName } from '../../types/const';
 
-const md = new MarkdownIt();
+const md = new MarkdownIt({
+  html: true
+});
 
 const route = useRoute();
 const data = computed(() => {
@@ -60,8 +62,12 @@ const typeName = computed(() => {
   border-radius: 8px;
   padding: 15px 20px;
 }
+:deep(h2) {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 768px) {
-  .blog {
+   .blog {
     width: 90vw;
   }
 }
