@@ -24,4 +24,4 @@ Object.values(allBlogs).forEach((blog) => {
   tagBlogs[blog.data.tag].push(blog);
 })
 
-fs.writeFileSync('src/build/data.js', `export const allBlogs = ${JSON.stringify(allBlogs)}\n\nexport const tagBlogs = ${JSON.stringify(tagBlogs)}\n`);
+fs.writeFileSync('src/build/data.ts', `export const allBlogs = ${JSON.stringify(allBlogs)}\n\nexport const tagBlogs = ${JSON.stringify(tagBlogs)}\n`);

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { tagBlogs } from '@/build/data.js'
+import { tagBlogs } from '../../build/data'
 import { computed } from 'vue';
 import { useRoute } from 'vue-router'
 import BlogTable from '../../components/BlogTable.vue'
@@ -13,8 +13,8 @@ import BlogTable from '../../components/BlogTable.vue'
 const router = useRoute();
 
 const list = computed(() => {
-  const type = router.query.type
-  return tagBlogs[type]
+  const type = router.query.type as ('life' | 'skill')
+  return type ? tagBlogs[type] : []
 })
 
 </script>

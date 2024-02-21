@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import circleUrl from '../../assets/rich.jpg';
-import { allBlogs, tagBlogs } from '@/build/data.js'
+import { allBlogs, tagBlogs } from '../../build/data'
 import BlogTable from '../../components/BlogTable.vue'
 
 

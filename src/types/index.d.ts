@@ -1,7 +1,7 @@
 export interface BlogItem {
   content: string;
   data: {
-    tag: stringl;
+    tag: string;
     title: string;
     date: string;
   }

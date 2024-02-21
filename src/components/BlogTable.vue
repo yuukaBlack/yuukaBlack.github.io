@@ -2,10 +2,10 @@
   <div class="table">
     <div v-for="(item, index) in props.list" :key="index" class="item" @click="openBlog(item)">
       <div class="title">
-        <span class="name">{{ item.data.title }}</span>
-        <span class="date">{{ item.data.date }}</span>
+        <span class="name">{{ item?.data.title }}</span>
+        <span class="date">{{ item?.data.date }}</span>
       </div>
-      <div class="summary">{{ getSummary(item.content) }}</div>
+      <div class="summary">{{ getSummary(item?.content) }}</div>
       <el-divider border-style="dashed" content-position="right"><el-icon><Ship /></el-icon></el-divider>
     </div>
   </div>
@@ -13,10 +13,15 @@
 
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it';
-import { useRouter } from 'vue-router';
-import { BlogItem } from '../types/index'
+import { useRouter, type LocationQueryValue } from 'vue-router';
+import type { BlogItem } from '../types/index'
 
-const props = defineProps(['list', 'type']);
+interface Props {
+  list: BlogItem[];
+  type?: LocationQueryValue | LocationQueryValue[];
+}
+
+const props = defineProps<Props>();
 const router = useRouter();
 
 const md = new MarkdownIt();
@@ -68,7 +73,7 @@ function openBlog(item: BlogItem) {
   .summary {
     text-align: left;
   }
-  .el-divider::v-deep .el-divider__text {
+  .el-divider:deep .el-divider__text {
     background-color: transparent;
   }
 }

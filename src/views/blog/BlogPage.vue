@@ -4,32 +4,32 @@
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
         <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ route.query.type }}</el-breadcrumb-item>
-        <el-breadcrumb-item>{{ data.data.title }}</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ data?.data.title }}</el-breadcrumb-item>
       </el-breadcrumb>
-      <div class="title">{{ data.data.title }}</div>
-      <div class="date">{{ data.data.date }}</div>
+      <div class="title">{{ data?.data.title }}</div>
+      <div class="date">{{ data?.data.date }}</div>
       <div v-html="blog" class="blog-md"></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { allBlogs } from '@/build/data.js'
+import { allBlogs } from '../../build/data'
 import { computed } from 'vue';
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it';
+import type { BlogItem } from '../../types/index';
 
 const md = new MarkdownIt();
 
 const route = useRoute();
 const data = computed(() => {
   const date = route.query.d
-  const data = allBlogs.find(item => item.data.date === date);
+  const data = allBlogs.find((item: BlogItem) => item.data.date === date);
   return data;
 })
 const blog = computed(() => {
-  console.log(11, data)
-  const html = md.render(data.value.content);
+  const html = md.render(data.value?.content);
   return html
 })
 
