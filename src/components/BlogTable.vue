@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <div v-for="(item, index) in props.list" :key="index" class="item" @click="openBlog(item)">
+    <div v-for="(item, index) in list" :key="index" class="item" @click="openBlog(item)">
       <div class="title">
         <span class="name">{{ item?.data.title }}</span>
         <span class="date">{{ item?.data.date }}</span>
@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it';
+import { computed } from 'vue';
 import { useRouter, type LocationQueryValue } from 'vue-router';
 import type { BlogItem } from '../types/index'
 
@@ -23,6 +24,10 @@ interface Props {
 
 const props = defineProps<Props>();
 const router = useRouter();
+
+const list = computed(() => {
+  return [...props.list].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+})
 
 const md = new MarkdownIt();
 
