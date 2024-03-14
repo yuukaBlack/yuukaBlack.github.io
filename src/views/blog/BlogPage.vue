@@ -6,7 +6,7 @@
         <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ typeName }}</el-breadcrumb-item>
         <el-breadcrumb-item>{{ data?.data.title }}</el-breadcrumb-item>
       </el-breadcrumb>
-      <div class="title">{{ data?.data.title }}</div>
+      <div class="title">{{ data?.data.title }} <span class="tag">{{ TypeName[data?.data.tag] }}</span></div>
       <div class="date">创建于 {{ data?.data.date }}</div>
       <div v-html="blog" class="blog-md"></div>
     </div>
@@ -29,8 +29,8 @@ const md = new MarkdownIt({
 
 const route = useRoute();
 const data = computed(() => {
-  const date = route.query.d
-  const data = allBlogs.find((item: BlogItem) => item.data.date === date);
+  const date = route.query.d as string
+  const data = allBlogs.find((item: BlogItem) => item.data.date===date)
   return data;
 })
 const blog = computed(() => {
@@ -53,6 +53,17 @@ const typeName = computed(() => {
   font-size: 24px;
   font-weight: 600;
   margin-top: 30px;
+  .tag {
+    color: rgb(0, 150, 94);
+    display: inline-block;
+    font-size: 14px;
+    padding: 0 6px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 3px;
+    background-color: rgba(0,150,94,.1);
+    margin-left: 10px;
+  }
 }
 .date {
   font-size: 13px;

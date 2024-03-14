@@ -1,8 +1,12 @@
+import type { TypeName } from "./const";
+
 export interface BlogItem {
   content: string;
   data: {
-    tag: string;
+    tag: TypeName;
     title: string;
     date: string;
-  }
+  };
+  isEmpty: boolean;
+  excerpt: string;
 }

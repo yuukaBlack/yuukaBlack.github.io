@@ -2,7 +2,10 @@
   <div class="table">
     <div v-for="(item, index) in list" :key="index" class="item" @click="openBlog(item)">
       <div class="title">
-        <span class="name">{{ item?.data.title }}</span>
+        <span class="name">
+          <span>{{ item?.data.title }}</span>
+          <span class="tag"> {{ TypeName[item.data.tag] }}</span>
+        </span>
         <span class="date">{{ item?.data.date }}</span>
       </div>
       <div class="summary">{{ getSummary(item?.content) }}</div>
@@ -16,6 +19,7 @@ import MarkdownIt from 'markdown-it';
 import { computed } from 'vue';
 import { useRouter, type LocationQueryValue } from 'vue-router';
 import type { BlogItem } from '../types/index'
+import { TypeName } from '../types/const';
 
 interface Props {
   list: BlogItem[];
@@ -32,7 +36,7 @@ const list = computed(() => {
 const md = new MarkdownIt();
 
 function getSummary(content: string) {
-  const text = md.render(content).replace(/<[^>]+>/g, '').slice(0, 50);
+  const text = md.render(content).replace(/<[^>]+>/g, '').slice(0, 150);
   return text
 }
 
@@ -56,11 +60,10 @@ function openBlog(item: BlogItem) {
   text-align: center;
 }
 .item {
-  padding: 15px 20px;
+  padding: 15px 20px 30px;
   cursor: pointer;
   &:hover {
-    background-color: rgba(118, 139, 125, 0.4);
-    border-radius: 8px;
+    transform: scale(1.02)
   }
   .title {
     display: flex;
@@ -70,6 +73,17 @@ function openBlog(item: BlogItem) {
     .name {
       font-size: 24px;
       font-weight: 600;
+      .tag {
+        color: rgb(0, 150, 94);
+        display: inline-block;
+        font-size: 14px;
+        padding: 0 6px;
+        height: 24px;
+        line-height: 24px;
+        border-radius: 3px;
+        background-color: rgba(0,150,94,.1);
+        margin-left: 10px;
+      }
     }
     .date {
       font-size: 12px;
