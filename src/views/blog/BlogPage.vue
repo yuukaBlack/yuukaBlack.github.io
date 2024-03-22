@@ -30,7 +30,7 @@ const md = new MarkdownIt({
 const route = useRoute();
 const data = computed(() => {
   const date = route.query.d as string
-  const data = allBlogs.find((item: BlogItem) => item.data.date===date)
+  const data = (allBlogs as BlogItem[]).find((item: BlogItem) => item.data.date === date) || {} as BlogItem
   return data;
 })
 const blog = computed(() => {
@@ -90,16 +90,27 @@ const typeName = computed(() => {
   margin: 10px 0;
   font-weight: 500;
 }
+:deep(h4) {
+  margin: 5px 0;
+  font-weight: 500;
+}
 :deep(strong) {
   font-weight: 700;
+}
+:deep(code) {
+  background-color: #e2ebf5;
+  padding: 3px 5px;
 }
 :deep(pre) {
   background-color: #f6f8fa;
   padding: 16px;
   margin-bottom: 15px;
+  code {
+    background-color: transparent;
+  }
 }
 :deep(em) {
-  background-color: rgba(64, 158, 255, 0.3);
+  background-color: rgba(240, 128, 64, 0.445);
 }
 :deep(p) {
   margin-bottom: 15px;

@@ -3,7 +3,7 @@ import type { TypeName } from "./const";
 export interface BlogItem {
   content: string;
   data: {
-    tag: TypeName;
+    tag: keyof typeof TypeName;
     title: string;
     date: string;
   };

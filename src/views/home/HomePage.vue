@@ -7,15 +7,18 @@
         <div>Welcome to my blog</div>
       </div>
     </div>
-    <blog-table :list="allBlogs"></blog-table>
+    <BlogTable :list="list"></BlogTable>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import circleUrl from '../../assets/rich.jpg';
-import { allBlogs, tagBlogs } from '../../build/data'
+import { allBlogs } from '../../build/data'
 import BlogTable from '../../components/BlogTable.vue'
+import type { BlogItem } from '../../types';
 
+const list = ref(allBlogs  as unknown as BlogItem[]);
 
 </script>
 
