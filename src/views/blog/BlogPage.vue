@@ -4,10 +4,10 @@
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ typeName }}</el-breadcrumb-item>
-        <el-breadcrumb-item>{{ data?.data.title }}</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ data?.data?.title }}</el-breadcrumb-item>
       </el-breadcrumb>
-      <div class="title">{{ data?.data.title }} <span class="tag">{{ TypeName[data?.data.tag] }}</span></div>
-      <div class="date">创建于 {{ data?.data.date }}</div>
+      <div class="title">{{ data?.data?.title }} <span class="tag">{{ TypeName[data?.data?.tag] }}</span></div>
+      <div class="date">创建于 {{ data?.data?.date }}</div>
       <div v-html="blog" class="blog-md"></div>
     </div>
   </div>
@@ -114,6 +114,12 @@ const typeName = computed(() => {
 }
 :deep(p) {
   margin-bottom: 15px;
+}
+:deep(ol) {
+  margin-bottom: 15px;
+}
+:deep(li > ol) {
+  margin-bottom: 0;
 }
 :deep(table) {
   border-collapse: collapse;
