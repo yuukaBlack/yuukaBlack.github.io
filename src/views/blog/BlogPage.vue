@@ -87,7 +87,7 @@ const typeName = computed(() => {
   font-weight: 600;
 }
 :deep(h3) {
-  margin: 10px 0;
+  margin: 16px 0 10px;
   font-weight: 500;
 }
 :deep(h4) {
@@ -119,7 +119,7 @@ const typeName = computed(() => {
   margin-bottom: 15px;
 }
 :deep(li > ol) {
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 :deep(table) {
   border-collapse: collapse;

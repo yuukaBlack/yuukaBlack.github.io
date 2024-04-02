@@ -60,7 +60,7 @@ function openBlog(item: BlogItem) {
   text-align: center;
 }
 .item {
-  padding: 15px 20px 30px;
+  padding: 20px 30px 30px;
   cursor: pointer;
   &:hover {
     transform: scale(1.02)
