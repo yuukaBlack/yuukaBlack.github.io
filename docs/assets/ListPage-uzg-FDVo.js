@@ -1,1 +1,0 @@
-import{e as a,f as o,o as c,c as n,g as r,u as p,B as u,h as _,t as l,_ as i}from"./index-aq2l2J9w.js";const d={class:"main"},m=a({__name:"ListPage",setup(f){const t=_(),s=o(()=>{const e=t.query.type;return e?l[e]:[]});return(e,y)=>(c(),n("div",d,[r(u,{list:s.value,type:p(t).query.type},null,8,["list","type"])]))}}),B=i(m,[["__scopeId","data-v-96d644c8"]]);export{B as default};

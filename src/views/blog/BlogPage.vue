@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { allBlogs } from '../../build/data'
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it';
 import MarkdownItAnchor from 'markdown-it-anchor'
@@ -25,7 +25,7 @@ import { TypeName } from '../../types/const';
 
 const md = new MarkdownIt({
   html: true
-}).use(MarkdownItAnchor, {permalink: true, permalinkBefore: true, permalinkSymbol: '#'}).use(MarkdownItToc);
+}).use(MarkdownItAnchor, { permalink: true, permalinkBefore: true, permalinkSymbol: '#'}).use(MarkdownItToc, { level: [1,2,3] });
 
 const route = useRoute();
 const data = computed(() => {
@@ -41,6 +41,7 @@ const typeName = computed(() => {
   return TypeName[route.query.type as keyof typeof TypeName]
 })
 
+window.scrollTo(0, 0)
 </script>
 
 <style lang="scss" scoped>
