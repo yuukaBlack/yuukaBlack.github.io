@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { allBlogs } from '../../build/data'
-import { computed, onMounted, onUnmounted } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it';
 import MarkdownItAnchor from 'markdown-it-anchor'

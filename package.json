@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node ./src/build/build.js && run-p type-check \"build-only {@}\" --",
+    "build:dev": "node ./src/build/build.js --mode=dev && run-p type-check \"build-only {@}\" --",
+    "build:prod": "node ./src/build/build.js --mode=prod && run-p type-check \"build-only {@}\" -- && ncp src/assets/images docs/assets/images",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
@@ -14,11 +15,13 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "dotenv": "^16.4.5",
     "element-plus": "^2.5.5",
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.0.0",
     "markdown-it-anchor": "^8.6.7",
     "markdown-it-toc-done-right": "^4.2.0",
+    "ncp": "^2.0.0",
     "sass": "^1.70.0",
     "scss": "^0.2.4",
     "vue": "^3.4.15",
