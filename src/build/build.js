@@ -25,15 +25,19 @@ function getConfigParam(key) {
 
 dotenv.config({ path: `.env.${getConfigParam('--mode')}`})
 
-const imagesPath = process.env.VUE_IMAGES_PATH
-
+const imagePath = process.env.VUE_IMAGES_PATH
 
 files.forEach(file => {
-  const filePath = path.join(docsDir, file);
-  let content = fs.readFileSync(filePath, 'utf-8');
-  content = content.replace(/\$\{VUE_IMAGES_PATH\}/g, imagesPath);
-  const parsed = matter(content);
-  result.push(parsed)
+  if(file !== 'image') {
+    const filePath = path.join(docsDir, file);
+    let content = fs.readFileSync(filePath, 'utf-8');
+    let pattern = /!\[.*?\]\(image\/.*?\)/g;
+    content = content.replace(pattern, function(match) {
+      return match.replace('image', imagePath);
+    });
+    const parsed = matter(content);
+    result.push(parsed)
+  }
 })
 allBlogs = result
 

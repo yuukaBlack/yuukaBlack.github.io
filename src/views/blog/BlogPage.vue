@@ -122,6 +122,9 @@ window.scrollTo(0, 0)
 :deep(li > ol) {
   margin-bottom: 5px;
 }
+:deep(img) {
+  max-width: 100%;
+}
 :deep(table) {
   border-collapse: collapse;
   th, td {
