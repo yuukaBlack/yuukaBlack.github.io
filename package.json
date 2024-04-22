@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build:dev": "node ./src/build/build.js --mode=dev && run-p type-check \"build-only {@}\" --",
-    "build:prod": "node ./src/build/build.js --mode=prod && run-p type-check \"build-only {@}\" -- && ncp src/doc/image docs/assets/image",
+    "build:prod": "node ./src/build/build.js --mode=prod && run-p type-check \"build-only {@}\" -- && ncp src/doc/image docs/assets/image && ncp 404.html docs/404.html",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
