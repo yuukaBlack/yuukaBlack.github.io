@@ -4,7 +4,7 @@
       <div class="title">
         <span class="name">
           <span>{{ item?.data.title }}</span>
-          <span class="tag"> {{ TypeName[item.data.tag] }}</span>
+          <span class="tag"> {{ TypeEnum[item.data.tag] }}</span>
         </span>
         <span class="date">{{ item?.data.date }}</span>
       </div>
@@ -19,7 +19,7 @@ import MarkdownIt from 'markdown-it';
 import { computed } from 'vue';
 import { useRouter, type LocationQueryValue } from 'vue-router';
 import type { BlogItem } from '../types/index'
-import { TypeName } from '../types/const';
+import { TypeEnum } from '../types/const';
 
 interface Props {
   list: BlogItem[];

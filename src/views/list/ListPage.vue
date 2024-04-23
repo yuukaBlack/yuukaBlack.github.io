@@ -9,13 +9,13 @@ import { tagBlogs } from '../../build/data'
 import { computed } from 'vue';
 import { useRoute } from 'vue-router'
 import BlogTable from '../../components/BlogTable.vue'
-import type { BlogItem } from '../../types';
+import type { BlogItem, TagBlogType } from '../../types';
 
 const router = useRoute();
 
 const list = computed(() => {
-  const type = router.query.type as ('life' | 'skill')
-  return (type ? tagBlogs[type] : []) as BlogItem[]
+  const type = router.query.type
+  return (type ? (tagBlogs as TagBlogType)[type as string] : []) as BlogItem[]
 })
 
 </script>

@@ -5,10 +5,7 @@ import dotenv from 'dotenv'
  
 let allBlogs = [];
 
-let tagBlogs = {
-  life: [],
-  skill: []
-};
+let tagBlogs = {};
 
 const docsDir = 'src/doc';
 const files = fs.readdirSync(docsDir);
@@ -42,7 +39,11 @@ files.forEach(file => {
 allBlogs = result
 
 Object.values(allBlogs).forEach((blog) => {
-  tagBlogs[blog.data.tag].push(blog);
+  if (tagBlogs[blog.data.tag]) {
+    tagBlogs[blog.data.tag]?.push(blog)
+  } else {
+    tagBlogs[blog.data.tag] = [blog]
+  }
 })
 
 fs.writeFileSync('src/build/data.ts', `export const allBlogs = ${JSON.stringify(allBlogs)}\n\nexport const tagBlogs = ${JSON.stringify(tagBlogs)}\n`);

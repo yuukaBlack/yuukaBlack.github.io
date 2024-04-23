@@ -3,25 +3,28 @@
     <div class="blog">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ typeName }}</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ TypeName }}</el-breadcrumb-item>
         <el-breadcrumb-item>{{ data?.data?.title }}</el-breadcrumb-item>
       </el-breadcrumb>
-      <div class="title">{{ data?.data?.title }} <span class="tag">{{ TypeName[data?.data?.tag] }}</span></div>
+      <div class="title">{{ data?.data?.title }} <span class="tag">{{ TypeEnum[data?.data?.tag] }}</span></div>
       <div class="date">创建于 {{ data?.data?.date }}</div>
       <div v-html="blog" class="blog-md"></div>
     </div>
+    <div id="gitalk-container"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { allBlogs } from '../../build/data'
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it';
 import MarkdownItAnchor from 'markdown-it-anchor'
 import MarkdownItToc from "markdown-it-toc-done-right"
 import type { BlogItem } from '../../types/index';
-import { TypeName } from '../../types/const';
+import { TypeEnum } from '../../types/const';
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
 
 const md = new MarkdownIt({
   html: true
@@ -37,11 +40,25 @@ const blog = computed(() => {
   const html = md.render('${toc}\n' + data.value?.content);
   return html
 })
-const typeName = computed(() => {
-  return TypeName[route.query.type as keyof typeof TypeName]
+const TypeName = computed(() => {
+  return TypeEnum[route.query.type as keyof typeof TypeEnum]
 })
 
 window.scrollTo(0, 0)
+
+onMounted(() => {
+  const gitalk = new Gitalk({
+    clientID: '41c17f28037c90e3b1f1',
+    clientSecret: '722d893a8ba00434eb3c18883e7560a35e8f43f5',
+    repo: 'yuukaBlack.github.io',     // The repository of store comments,
+    owner: 'yuukaBlack',
+    admin: ['yuukaBlack'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+})
 </script>
 
 <style lang="scss" scoped>
