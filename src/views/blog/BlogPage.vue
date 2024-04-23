@@ -9,8 +9,11 @@
       <div class="title">{{ data?.data?.title }} <span class="tag">{{ TypeEnum[data?.data?.tag] }}</span></div>
       <div class="date">创建于 {{ data?.data?.date }}</div>
       <div v-html="blog" class="blog-md"></div>
+      <div class="comment">
+        <el-divider border-style="dashed"><el-icon size="24"><EditPen /></el-icon></el-divider>
+        <div id="gitalk-container"></div>
+      </div>
     </div>
-    <div id="gitalk-container"></div>
   </div>
 </template>
 
@@ -66,6 +69,14 @@ onMounted(() => {
   width: 55vw;
   margin: 0 auto;
   padding-top: 50px;
+}
+.comment {
+  padding-top: 60px;
+  background-color: white;
+  #gitalk-container {
+    background-color: white;
+    padding: 0 20px 15px;
+  }
 }
 .title {
   font-size: 24px;
