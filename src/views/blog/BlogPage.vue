@@ -161,6 +161,14 @@ onMounted(() => {
     padding: 3px 10px;
   }
 }
+:deep(blockquote) {
+  border-left: 5px solid #a4c0e0;
+  padding: 5px 15px;
+  background-color: #a4c0e059;
+  p {
+    margin-bottom: 5px;
+  }
+}
 
 @media (max-width: 768px) {
    .blog {
