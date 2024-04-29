@@ -129,6 +129,10 @@ onMounted(() => {
 :deep(code) {
   background-color: #e2ebf5;
   padding: 3px 5px;
+  display: inline-block;
+  white-space: pre-wrap;
+  width: 100%;
+  overflow-x: scroll;
 }
 :deep(pre) {
   background-color: #f6f8fa;
@@ -173,6 +177,9 @@ onMounted(() => {
 @media (max-width: 768px) {
    .blog {
     width: 90vw;
+  }
+  :deep(.table-of-contents) {
+    display: none;
   }
 }
 </style>
