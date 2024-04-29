@@ -105,7 +105,7 @@ onMounted(() => {
   padding: 15px 20px;
   :deep(.table-of-contents) {
     position: fixed;
-    left: 7vw;
+    left: 6vw;
     li {
       list-style: none;
     }
