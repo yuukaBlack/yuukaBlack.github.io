@@ -5,7 +5,7 @@
     :ellipsis="false"
     @select="handleSelect"
   >
-    <el-menu-item index="/">
+    <el-menu-item index="/" class="name">
       Yuuka
     </el-menu-item>
     <a class="github" href="https://github.com/yuukaBlack" target="_blank"><img :src="github"></a>
@@ -27,7 +27,7 @@ import { useRouter } from 'vue-router'
 import github from '../assets/github.svg'
 import { TypeEnum } from '../types/const'
 import type { TagBlogType } from '../types'
-import { tagBlogs } from '@/build/data'
+import { tagBlogs } from '../build/data'
 
 const activeIndex = ref('1')
 const router = useRouter()
@@ -61,6 +61,13 @@ const tagBlogsCount = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+.el-menu {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #fff, $alpha: 0.8);
+  z-index: 1;
+}
 .github {
   display: inline-flex;
   align-items: center;
@@ -68,5 +75,9 @@ const tagBlogsCount = computed(() => {
 }
 .flex-grow {
   flex-grow: 1;
+}
+.name {
+  font-weight: 600;
+  font-size: 18px;
 }
 </style>

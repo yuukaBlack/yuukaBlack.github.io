@@ -13,10 +13,15 @@
 </template>
 
 <style lang="scss" scoped>
+.main {
+  padding-top: 100px;
+}
 .about {
   width: 55vw;
-  margin: 0 auto;
-  padding-top: 100px;
+  margin: 0 auto ;
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px 20px;
   h1 {
     margin-bottom: 20px;
   }

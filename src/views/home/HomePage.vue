@@ -31,7 +31,7 @@ const list = ref(allBlogs  as unknown as BlogItem[]);
 }
 .desc {
   font-size: 26px;
-  color: rgb(10, 71, 10);
+  color: white;
   margin-top: 50px;
   text-align: left;
   > div {

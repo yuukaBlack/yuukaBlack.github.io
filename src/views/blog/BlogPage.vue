@@ -3,7 +3,7 @@
     <div class="blog">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ TypeName }}</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="route.query.type" :to="{ path: '/list', query: { type: route.query.type } }">{{ useTypeName() }}</el-breadcrumb-item>
         <el-breadcrumb-item>{{ data?.data?.title }}</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="title">{{ data?.data?.title }} <span class="tag">{{ TypeEnum[data?.data?.tag] }}</span></div>
@@ -28,6 +28,7 @@ import type { BlogItem } from '../../types/index';
 import { TypeEnum } from '../../types/const';
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
+import { useTypeName } from '../../hooks/useTypeName';
 
 const md = new MarkdownIt({
   html: true
@@ -42,9 +43,6 @@ const data = computed(() => {
 const blog = computed(() => {
   const html = md.render('${toc}\n' + data.value?.content);
   return html
-})
-const TypeName = computed(() => {
-  return TypeEnum[route.query.type as keyof typeof TypeEnum]
 })
 
 window.scrollTo(0, 0)
@@ -69,6 +67,9 @@ onMounted(() => {
   width: 55vw;
   margin: 0 auto;
   padding-top: 50px;
+  :deep(.el-breadcrumb__inner:not(.is-link)) {
+    color: #393f4a;
+  }
 }
 .comment {
   padding-top: 60px;
@@ -83,20 +84,20 @@ onMounted(() => {
   font-weight: 600;
   margin-top: 30px;
   .tag {
-    color: rgb(0, 150, 94);
+    color: white;
     display: inline-block;
     font-size: 14px;
     padding: 0 6px;
     height: 24px;
     line-height: 24px;
     border-radius: 3px;
-    background-color: rgba(0,150,94,.1);
+    background-color: rgb(0, 150, 95);
     margin-left: 10px;
   }
 }
 .date {
   font-size: 13px;
-  color: rgb(108, 108, 108);
+  color: #393f4a;
   margin: 5px 0 20px;
 }
 .blog-md {
@@ -105,9 +106,12 @@ onMounted(() => {
   padding: 15px 20px;
   :deep(.table-of-contents) {
     position: fixed;
-    left: 6vw;
+    left: 5vw;
     li {
       list-style: none;
+      a  {
+        color: #393f4a;
+      }
     }
   }
 }
