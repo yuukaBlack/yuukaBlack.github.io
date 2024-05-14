@@ -9,6 +9,18 @@
       <div class="title">{{ data?.data?.title }} <span class="tag">{{ TypeEnum[data?.data?.tag] }}</span></div>
       <div class="date">创建于 {{ data?.data?.date }}</div>
       <div v-html="blog" class="blog-md"></div>
+      <div class="nav-bottom">
+        <div class="pre" @click="handleClickPre">
+          <span v-if="showPre">
+            <el-icon><ArrowLeftBold /></el-icon>{{ nav.pre.title }}
+          </span>
+        </div>
+        <div class="next" @click="handleClickNext">
+          <span v-if="showNext">
+            {{ nav.next.title }}<el-icon><ArrowRightBold /></el-icon>
+          </span>
+        </div>
+      </div>
       <div class="comment">
         <el-divider border-style="dashed"><el-icon size="24"><EditPen /></el-icon></el-divider>
         <div id="gitalk-container"></div>
@@ -20,7 +32,7 @@
 <script setup lang="ts">
 import { allBlogs } from '../../build/data'
 import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import MarkdownIt from 'markdown-it';
 import MarkdownItAnchor from 'markdown-it-anchor'
 import MarkdownItToc from "markdown-it-toc-done-right"
@@ -29,15 +41,22 @@ import { TypeEnum } from '../../types/const';
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
 import { useTypeName } from '../../hooks/useTypeName';
+import useNavStore from '../../store/useNavStore';
+
+const nav = useNavStore()
 
 const md = new MarkdownIt({
   html: true
 }).use(MarkdownItAnchor, { permalink: true, permalinkBefore: true, permalinkSymbol: '#'}).use(MarkdownItToc, { level: [1,2,3] });
 
 const route = useRoute();
+const router = useRouter();
 const data = computed(() => {
   const date = route.query.d as string
   const data = (allBlogs as BlogItem[]).find((item: BlogItem) => item.data.date === date) || {} as BlogItem
+  const index = nav.nav.findIndex(item => item.date === date)
+  nav.setPreNext(nav.nav[index - 1], nav.nav[index + 1])
+  window.scrollTo(0, 0)
   return data;
 })
 const blog = computed(() => {
@@ -45,7 +64,32 @@ const blog = computed(() => {
   return html
 })
 
+const showPre = computed(() => nav.pre)
+
+const showNext = computed(() => nav.next)
+
 window.scrollTo(0, 0)
+
+function handleClickPre() {
+  router.push({
+    name: 'blog',
+    query: {
+      d: nav.pre.date,
+      type: route.query.type
+    }
+  })
+}
+
+function handleClickNext() {
+  router.push({
+    name: 'blog',
+    query: {
+      d: nav.next.date,
+      type: route.query.type
+    }
+  })
+}
+
 
 onMounted(() => {
   const gitalk = new Gitalk({
@@ -64,7 +108,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .blog {
-  width: 55vw;
+  width: 60vw;
   margin: 0 auto;
   padding-top: 50px;
   :deep(.el-breadcrumb__inner:not(.is-link)) {
@@ -72,11 +116,32 @@ onMounted(() => {
   }
 }
 .comment {
-  padding-top: 60px;
   background-color: white;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
   #gitalk-container {
     background-color: white;
     padding: 0 20px 15px;
+  }
+}
+.nav-bottom {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px 60px;
+  cursor: pointer;
+  .pre, .next {
+    &:hover {
+      color: var(--el-color-primary);
+    }
+    >span {
+      display: inline-flex;
+      align-items: center;
+      font-size: 13px;
+      i {
+        margin: 0 5px;
+      }
+    }
   }
 }
 .title {
@@ -102,11 +167,11 @@ onMounted(() => {
 }
 .blog-md {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   padding: 15px 20px;
   :deep(.table-of-contents) {
     position: fixed;
-    left: 5vw;
+    left: 1vw;
     li {
       list-style: none;
       a  {

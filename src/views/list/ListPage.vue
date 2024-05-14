@@ -30,7 +30,7 @@ const list = computed(() => {
     color: white;
     margin-top: 50px;
     text-align: left;
-    width: 55vw;
+    width: 60vw;
     margin: 0 auto;
     padding: 70px 0;
     text-align: center;

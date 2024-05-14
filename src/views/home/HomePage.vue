@@ -24,7 +24,7 @@ const list = ref(allBlogs  as unknown as BlogItem[]);
 
 <style lang="scss" scoped>
 .head {
-  width: 55vw;
+  width: 60vw;
   margin: 0 auto;
   padding: 70px 0;
   text-align: center;

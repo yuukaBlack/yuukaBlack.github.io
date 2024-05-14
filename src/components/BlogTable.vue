@@ -16,21 +16,30 @@
 
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it';
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { useRouter, type LocationQueryValue } from 'vue-router';
 import type { BlogItem } from '../types/index'
 import { TypeEnum } from '../types/const';
+import useNavStore from '../store/useNavStore';
 
 interface Props {
   list: BlogItem[];
   type?: LocationQueryValue | LocationQueryValue[];
 }
 
+const nav = useNavStore();
 const props = defineProps<Props>();
 const router = useRouter();
 
 const list = computed(() => {
   return [...props.list].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+})
+
+watchEffect(() => {
+  nav.setNav(list.value.map(item => ({
+    title: item.data.title,
+    date: item.data.date,
+  })))
 })
 
 const md = new MarkdownIt();
@@ -41,6 +50,8 @@ function getSummary(content: string) {
 }
 
 function openBlog(item: BlogItem) {
+  const index = nav.nav.findIndex(i => i.date === item.data.date)
+  nav.setPreNext(nav.nav[index - 1], nav.nav[index + 1])
   router.push({
     name: 'blog',
     query: {
@@ -53,7 +64,7 @@ function openBlog(item: BlogItem) {
 
 <style lang="scss" scoped>
 .table {
-  width: 55vw;
+  width: 60vw;
   margin: 0 auto;
   background: white;
   border-radius: 8px;

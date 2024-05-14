@@ -17,7 +17,7 @@
   padding-top: 100px;
 }
 .about {
-  width: 55vw;
+  width: 60vw;
   margin: 0 auto ;
   background-color: white;
   border-radius: 8px;
