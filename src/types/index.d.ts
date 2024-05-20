@@ -14,3 +14,9 @@ export interface BlogItem {
 export type TagBlogType = {
   [key: string]: BlogItem[];
 };
+
+export interface SearchItemType {
+  title: string;
+  content: string;
+  date: string;
+}

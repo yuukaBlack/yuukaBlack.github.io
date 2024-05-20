@@ -96,3 +96,8 @@ body .main {
   min-height: calc(100vh - 60px);
   padding-bottom: 50px;
 }
+body .el-dialog {
+  min-height: 300px;
+  border-radius: 20px;
+  padding: 20px 30px;
+}
