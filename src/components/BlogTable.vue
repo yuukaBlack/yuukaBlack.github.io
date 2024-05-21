@@ -11,6 +11,7 @@
       <div class="summary">{{ getSummary(item?.content) }}</div>
       <el-divider border-style="dashed" content-position="right"><el-icon><Ship /></el-icon></el-divider>
     </div>
+    <el-backtop :right="100" :bottom="100" />
   </div>
 </template>
 
